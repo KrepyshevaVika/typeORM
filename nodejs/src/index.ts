@@ -20,38 +20,15 @@ createConnection().then(async connection => {
     console.log("Here you can setup and run express/koa/any other framework.");
 
     //-------------------------------------------
-
-    const data = [{
-        name: 'control node',
-        is_endpoint: false
-      },{
-        name: 'storage node',
-        is_endpoint: true
-      },{
-        name: 'render node',
-        is_endpoint: true
-      },{
-        name: 'node js',
-        is_endpoint: true
-      },{
-        name: 'pacs',
-        is_endpoint: true
-      },{
-        name: 'nginx',
-        is_endpoint: false
-      }];
-
-    let NodeType = new node_type();
-
-    let arrNodeType = data.map((elem) => {
-        NodeType.name = Object.assign({}, elem.name);
-        NodeType.is_endpoint = Object.assign({}, elem.is_endpoint);
-        return NodeType;
-    })
-
-    console.log(arrNodeType);
     await connection.manager
-            .save(arrNodeType)
+            .save([
+              new node_type('control node', false),
+              new node_type('storage node', true),
+              new node_type('render node', true),
+              new node_type('node js', true),
+              new node_type('pacs', true),
+              new node_type('nginx', false)
+            ])
             .then(() => {
                 console.log("nodes have been saved.");
             })

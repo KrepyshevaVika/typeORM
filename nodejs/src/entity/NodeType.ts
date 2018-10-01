@@ -12,4 +12,9 @@ export class node_type {
     @Column()
     is_endpoint: boolean;
 
+    constructor(name: string, is_endpoint: boolean){
+        this.name = name;
+        this.is_endpoint = is_endpoint;
+    }
+
 }
